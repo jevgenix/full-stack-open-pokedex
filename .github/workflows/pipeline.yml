@@ -44,6 +44,9 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+      - name: simple test
+        run: echo "${{ steps.deploy.conclusion == 'success' }} ${{ github.actor }} ${{ github.sha }}"
+
       - name: Deployment Succeeded
         uses: rjstone/discord-webhook-notify@v1
         if: ${{success() && steps.deploy.conclusion == 'success' }}
