@@ -44,6 +44,22 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+      - name: Deployment Succeeded
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{success() && steps.deploy.conclusion == 'success' }}
+        with:
+          severity: info
+          details: A new version of Pokedex deployed to https://actions-pokedex-app.herokuapp.com/ by ${{ github.actor }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Deployment Failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure() && steps.deploy.conclusion == 'failure' }}
+        with:
+          severity: error
+          details: ${{ github.sha }} by ${{ github.actor }} broke the build :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     needs: simple_deployment_pipeline
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
