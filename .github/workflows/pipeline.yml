@@ -54,7 +54,8 @@ jobs:
         if: ${{success() && steps.deploy.conclusion == 'success' }}
         with:
           severity: info
-          details: A new version of Pokedex deployed to https://actions-pokedex-app.herokuapp.com/ by ${{ github.actor }}
+          text: A new version of Pokedex deployed to
+          description: https://actions-pokedex-app.herokuapp.com/ by ${{ github.actor }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Deployment Failed
@@ -62,7 +63,8 @@ jobs:
         if: ${{failure() && steps.deploy.conclusion == 'failure' }}
         with:
           severity: error
-          details: ${{ github.sha }} by ${{ github.actor }} broke the build :(
+          text: Build failed
+          description: ${{ github.sha }} by ${{ github.actor }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
