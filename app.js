@@ -19,5 +19,3 @@ app.listen(PORT, () => {
 // something
 console.log('whoah')
 
-// checking how tags works
-console.log('interesting...')
