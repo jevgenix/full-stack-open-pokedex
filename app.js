@@ -18,6 +18,3 @@ app.listen(PORT, () => {
 
 // something
 console.log('whoah')
-
-// meow
-console.log('meow')
