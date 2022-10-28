@@ -35,6 +35,8 @@ jobs:
           wait-on-timeout: 120
 
       - name: deploy
+        # need to be added for steps.<step_id>.conclusion
+        id: delpoy
         uses: akhileshns/heroku-deploy@v3.12.12 # Deploy to heroku action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
